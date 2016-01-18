@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14A389" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Item" representedClassName="Item" syncable="YES">
+        <attribute name="collected" optional="YES" attributeType="Boolean" defaultValueString="NO" syncable="YES"/>
+        <attribute name="listed" optional="YES" attributeType="Boolean" defaultValueString="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" defaultValueString="New Item" indexed="YES" syncable="YES"/>
+        <attribute name="photoData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="quantity" optional="YES" attributeType="Float" defaultValueString="1" syncable="YES"/>
+        <relationship name="locationHome" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationHome" inverseName="items" inverseEntity="LocationHome" syncable="YES"/>
+        <relationship name="locationShop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="LocationShop" inverseName="itens" inverseEntity="LocationShop" syncable="YES"/>
+        <relationship name="unit" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Unit" inverseName="items" inverseEntity="Unit" syncable="YES"/>
+    </entity>
+    <entity name="Location" representedClassName="Location" isAbstract="YES" syncable="YES">
+        <attribute name="summary" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="LocationHome" representedClassName="LocationHome" parentEntity="Location" syncable="YES">
+        <attribute name="locationAtHome" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="locationHome" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="LocationShop" representedClassName="LocationShop" parentEntity="Location" syncable="YES">
+        <attribute name="locationAtShop" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="itens" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="locationShop" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <entity name="Unit" representedClassName="Unit" syncable="YES">
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="items" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Item" inverseName="unit" inverseEntity="Item" syncable="YES"/>
+    </entity>
+    <fetchRequest name="ShoppingList" entity="Item" predicateString="listed == 1"/>
+    <fetchRequest name="test" entity="Item" predicateString="name CONTAINS &quot;cheng&quot;"/>
+    <fetchRequest name="unknowShopLocation" entity="LocationShop" predicateString="locationAtShop == &quot;..unknowLocation..&quot;"/>
+    <fetchRequest name="unknowUnit" entity="Unit" predicateString="name == &quot;个&quot;"/>
+    <fetchRequest name="unkonwHomeLocation" entity="LocationHome" predicateString="locationAtHome == &quot;..unknowLocation..&quot;"/>
+    <elements>
+        <element name="Item" positionX="27" positionY="99" width="128" height="163"/>
+        <element name="Location" positionX="7" positionY="-99" width="128" height="58"/>
+        <element name="LocationHome" positionX="-191" positionY="-27" width="128" height="73"/>
+        <element name="LocationShop" positionX="252" positionY="-36" width="128" height="73"/>
+        <element name="Unit" positionX="322" positionY="215" width="128" height="73"/>
+    </elements>
+</model>
